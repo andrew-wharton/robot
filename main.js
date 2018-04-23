@@ -20,6 +20,8 @@ if(process.argv.length > 2) {
 
       var commands = contents.split('\n');
 
+      // Run the commands, starting with the state as null
+      // ie. the robot is not on the board
       commands.reduce(function(currentState, command) {
         try {
           // Handle command takes a command and currentState
