@@ -1,7 +1,11 @@
 /**
  * Created by andrew on 23/4/18.
  */
+var assert = require('assert');
 
+/**
+ * Mapping of functions to move the robot based on its orientation
+ */
 var moveMapping = {
   NORTH: function moveNorth(state) {
     return {
@@ -37,10 +41,17 @@ var moveMapping = {
  * @param currentState
  */
 function move(command, currentState) {
+
+  // Check that the robot is placed on the board with an initial state
+  assert(currentState !== null);
+
+  // Get the appropriate move function based on the direction the robot is facing
   var moveFunction = moveMapping[currentState.f];
   var newState = moveFunction(currentState);
-  // f is unchanged and the same for all moves when moving
+
+  // f is unchanged and the same for all moves
   newState.f = currentState.f;
+
   return newState
 }
 
