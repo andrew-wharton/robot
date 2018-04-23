@@ -3,6 +3,6 @@
  */
 
 module.exports = function report(command, currentState) {
-  console.log("Report: " + JSON.stringify(currentState));
+  console.log([currentState.x, currentState.y, currentState.f].join(','));
   return currentState
 };
