@@ -4,11 +4,12 @@
   "description": "IOOF coding challenge",
   "main": "main.js",
   "scripts": {
-    "test": "mocha --exit"
+    "test": "mocha --exit",
+    "example": "node main.js commands.txt"
   },
   "author": "Andrew Wharton <andrew@whartonlabs.com>",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "mocha": "^5.1.1"
   }
 }
