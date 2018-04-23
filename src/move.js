@@ -4,7 +4,7 @@
 var assert = require('assert');
 
 /**
- * Mapping of functions to move the robot based on its orientation
+ * Mapping of functions to move the robot based on it's orientation
  */
 var moveMapping = {
   NORTH: function moveNorth(state) {
