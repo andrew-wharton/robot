@@ -1,7 +1,4 @@
-/**
- * Handles the parsing of the command and args, as well as dispatching
- * to the appropriate command, as well as applying any constraints
- */
+
 var assert = require('assert');
 var place = require('./place');
 var move = require('./move');
@@ -25,18 +22,18 @@ var commandMapping = {
  * Array of functions which describe the constraints on the movement of the robot
  */
 var constraints = [
-  function tableIs5UnitWide(state) {
+  function tableIs5UnitsWide(state) {
     return state.x >= 0 && state.x <= 4
   },
-  function tableIs5UnitHigh(state) {
+  function tableIs5UnitsHigh(state) {
     return state.y >= 0 && state.y <= 4
   }
 ];
 
 /**
- * Handles the logic to figure out which command is being called, dispatching it
- * to the correct handler and checking the new state against any constraints
- * to make sure it is valid.
+ * Handles the parsing of the command and dispatching
+ * to the appropriate command function, as well as checking the new state
+ * against any constraints to make sure it's valid
  *
  * @param command
  * @param currentState
@@ -49,15 +46,16 @@ function handleCommand(command, currentState) {
   assert(tokenizedCommand.length > 0);
   var commandName = tokenizedCommand[0];
 
-  // If there has not yet been a PLACE command
-  // to set an initial valid state, ignore the command
+  // If there is not a current valid state, and this is not a 'PLACE' command,
+  // then ignore the command
   if(currentState === null && commandName !== 'PLACE') {
     return currentState
   } else {
     // Check if the command is available
     if(commandMapping[commandName]) {
 
-      // Apply the command to the state to get the new state
+      // Get the appropriate command function and apply the command to the
+      // state to get the new state
       var commandFunction = commandMapping[commandName];
       var newState = commandFunction(command, currentState);
 
