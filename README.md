@@ -1,5 +1,3 @@
-# IOOF coding challenge
-
 Submission from Andrew Wharton.
 
 ## Dependencies
