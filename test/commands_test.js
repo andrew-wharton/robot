@@ -71,6 +71,11 @@ describe('Commands', function() {
       assert(newState.y === 0);
       assert(newState.f === 'WEST');
     });
+    it('should throw an exception if there is no initial state', function() {
+      assert.throws(function() {
+        move('MOVE', null);
+      })
+    })
   });
 
   describe('left command', function() {
