@@ -1,0 +1,14 @@
+{
+  "name": "ioof",
+  "version": "1.0.0",
+  "description": "IOOF coding challenge",
+  "main": "main.js",
+  "scripts": {
+    "test": "mocha --exit"
+  },
+  "author": "Andrew Wharton <andrew@whartonlabs.com>",
+  "license": "ISC",
+  "dependencies": {
+    "mocha": "^5.1.1"
+  }
+}
