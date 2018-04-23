@@ -13,19 +13,20 @@ if(process.argv.length > 2) {
    */
   fs.readFile(process.argv[2], 'utf8', function(err, contents) {
     if(err) {
-      console.log("Error reading input file");
+      console.log("Error reading input file: " + err.message);
       process.exit(1);
     } else {
+
       var commands = contents.split('\n');
-      commands.reduce(function(currentState, command, i) {
+
+      commands.reduce(function(currentState, command) {
         try {
           // Handle command takes a command and currentState
           // and returns a new state
           return handleCommand(command, currentState);
         } catch(err) {
-          // Something went wrong handling the command, probably invalid args
+          // Something went wrong handling the command, eg. invalid args,
           // so skip it.
-          console.error("Error executing command " + i + ': '+ err.message);
           return currentState;
         }
       }, null);
