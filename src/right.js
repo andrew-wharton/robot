@@ -2,13 +2,15 @@
  * Created by andrew on 23/4/18.
  */
 var assert = require('assert');
+var orientations = require('./orientations');
 
-var rightOrientationMapping = {
-  NORTH: "EAST",
-  EAST: "SOUTH",
-  SOUTH: "WEST",
-  WEST: "NORTH"
-};
+// Dead simple mapping for which direction is to the left of the given orientation
+// Was using an object literal, but wanted to get rid of the magic strings...
+var rightTurnMapping = {};
+rightTurnMapping[orientations.NORTH] = orientations.EAST;
+rightTurnMapping[orientations.EAST] = orientations.SOUTH;
+rightTurnMapping[orientations.SOUTH] = orientations.WEST;
+rightTurnMapping[orientations.WEST] = orientations.NORTH;
 
 /**
  *
@@ -23,6 +25,6 @@ module.exports = function right(command, currentState) {
   return {
     x: currentState.x,
     y: currentState.y,
-    f: rightOrientationMapping[currentState.f]
+    f: rightTurnMapping[currentState.f]
   }
 };

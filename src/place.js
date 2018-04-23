@@ -3,7 +3,9 @@
  *
  * @returns object - The new state after the command has been applied
  */
-var SUPPORTED_ORIENTATIONS = ['NORTH', 'SOUTH', 'EAST', 'WEST'];
+var orientations = require('./orientations');
+
+var SUPPORTED_ORIENTATIONS = Object.values(orientations);
 
 module.exports = function place(command) {
 
