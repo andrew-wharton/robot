@@ -11,9 +11,7 @@ var report = require('./report');
 
 
 /**
- * Wire in the configured commands, along with their keywords
- *
- * @type {{PLACE: (*|exports|module.exports)}}
+ * Mapping of configured commands and their keywords
  */
 var commandMapping = {
   "PLACE": place,
@@ -24,20 +22,32 @@ var commandMapping = {
 };
 
 /**
+ * Array of functions which describe the constraints on the movement of the robot
+ */
+var constraints = [
+  function tableIs5UnitWide(state) {
+    return state.x >= 0 && state.x <= 4
+  },
+  function tableIs5UnitHigh(state) {
+    return state.y >= 0 && state.y <= 4
+  }
+];
+
+/**
  * Handles the logic to figure out which command is being called, dispatching it
  * to the correct handler and checking the new state against any constraints
  * to make sure it is valid.
  *
  * @param command
  * @param currentState
- * @param constraints {array} - an Array of function which check that a state is valid
  * @returns {object} - The new state after the given command has been executed
  */
-function handleCommand(command, currentState, constraints = []) {
+function handleCommand(command, currentState) {
 
   // Parse the command to figure out which function it should be dispatched to
-  var tokenisedCommand = command.split(' ');
-  var commandName = tokenisedCommand[0];
+  var tokenizedCommand = command.split(' ');
+  assert(tokenizedCommand.length > 0);
+  var commandName = tokenizedCommand[0];
 
   // If there has not yet been a PLACE command
   // to set an initial valid state, ignore the command
@@ -51,7 +61,7 @@ function handleCommand(command, currentState, constraints = []) {
       var commandFunction = commandMapping[commandName];
       var newState = commandFunction(command, currentState);
 
-      // Quick sanity check that the types for the new state are valid
+      // Quick sanity check that the types for the new state are what is expected
       assert(typeof newState.x === 'number', 'x should be a Number');
       assert(typeof newState.y === 'number', 'y should be a Number');
       assert(typeof newState.f === 'string', 'f should be a String');
