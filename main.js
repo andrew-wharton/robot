@@ -1,5 +1,6 @@
 /**
- * Created by andrew on 23/4/18.
+ * Main entry point. Handles the loading and parsing of the input file data and
+ * running the commands to get to our final state.
  */
 var fs = require('fs');
 var handleCommand = require('./src/handleCommand');
